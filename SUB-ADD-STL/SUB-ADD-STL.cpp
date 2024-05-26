@@ -33,12 +33,7 @@ namespace fs = std::filesystem;
 bool DEBUG = false;
 
 
-#ifndef M_PI
 #define M_PI 3.14159265358979323846
-#endif
-constexpr double deg_to_rad(double degrees) {
-    return degrees * M_PI / 180.0;
-}
 
 
 Point compute_centroid(const Mesh& mesh, Mesh::Face_index face) {
@@ -147,9 +142,9 @@ void translate_mesh(Mesh& mesh, const Vector& translation_vector) {
 }
 
 void rotate_mesh(Mesh& mesh, double x_deg, double y_deg, double z_deg) {
-    double rot_x = deg_to_rad(x_deg);
-    double rot_y = deg_to_rad(y_deg);
-    double rot_z = deg_to_rad(z_deg);
+    double rot_x = x_deg * M_PI / 180.0;
+    double rot_y = y_deg * M_PI / 180.0;
+    double rot_z = z_deg * M_PI / 180.0;
     double cos_x = std::cos(rot_x), sin_x = std::sin(rot_x);
     Transformation rot_mtx_x(1, 0, 0, 0, 0, cos_x, -sin_x, 0, 0, sin_x, cos_x, 0, 1);
     double cos_y = std::cos(rot_y), sin_y = std::sin(rot_y);
